@@ -4,7 +4,7 @@ import { DoctorDto } from "./dto";
 
 @Controller('doctors')
 export class DoctorController {
-    constructor(private doctorService: DoctorService) {}
+    constructor(private doctorService: DoctorService) { }
 
     @Post()
     create(@Body() dto: DoctorDto) {

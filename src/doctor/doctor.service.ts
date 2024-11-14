@@ -5,16 +5,14 @@ import * as argon from 'argon2';
 
 @Injectable()
 export class DoctorService {
-
-    constructor(private prisma: PrismaService) {}
+    constructor(private prisma: PrismaService) { }
 
     async create(dto: DoctorDto) {
         // generate a hash of the password
         const hash = await argon.hash(dto.password);
 
         //check if the email already exists
-        try
-        {
+        try {
             //save the user to the database
             const doctor = await this.prisma.doctor.create({
                 data: {
@@ -24,7 +22,7 @@ export class DoctorService {
                     lastName: dto.lastName,
                 },
             });
-            
+
             const { password, ...result } = doctor;
             return result;
         } catch (error) {
