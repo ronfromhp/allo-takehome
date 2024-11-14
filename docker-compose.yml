@@ -8,3 +8,16 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: allo
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+    depends_on:
+      - dev-db
+    environment:
+      DATABASE_URL: postgres://postgres:123@dev-db:5432/allo
