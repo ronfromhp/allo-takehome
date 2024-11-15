@@ -22,11 +22,10 @@ Make sure you have the following installed on your machine:
     npm install
     ```
 
-
 ## Running the Project Locally
 
 1. Set up the environment variables:
-    - Create a `.env` file in the root directory of the project.
+    - Create a `.env` file in the `app/` directory of the project.
     - Add the following environment variables to the `.env` file (for local development only):
         ```env
         DATABASE_URL=postgresql://postgres:123@localhost:5432/allo?schema=public
@@ -44,17 +43,22 @@ Make sure you have the following installed on your machine:
 
 ## Provisioning AWS Resources
 
-1. Navigate to the Terraform directory:
+1. Configure the AWS CLI if not already authenticated:
+    ```bash
+    aws configure
+    ```
+
+2. Navigate to the Terraform directory:
     ```bash
     cd ../terraform
     ```
 
-2. Initialize Terraform:
+3. Initialize Terraform:
     ```bash
     terraform init
     ```
 
-3. Apply the Terraform configuration to provision the resources:
+4. Apply the Terraform configuration to provision the resources:
     ```bash
     terraform apply -auto-approve
     ```
@@ -68,6 +72,8 @@ Run the deployment script to build, push, and deploy the application:
 ```bash
 ../deploy.sh
 ```
+
+The script will output the URL of the deployed application. Use this URL to verify the deployment in your browser or with `curl`.
 
 ### Cleaning Up
 
