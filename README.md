@@ -5,7 +5,9 @@
 Make sure you have the following installed on your machine:
 - Node.js (>= 14.x)
 - npm (>= 6.x)
-- Docker (for running the database)
+- Docker
+- AWS CLI
+- Terraform
 
 ## Installation
 
@@ -20,25 +22,57 @@ Make sure you have the following installed on your machine:
     npm install
     ```
 
-3. Set up the environment variables:
+
+## Running the Project Locally
+
+1. Set up the environment variables:
     - Create a `.env` file in the root directory of the project.
-    - Add the following environment variables to the `.env` file:
+    - Add the following environment variables to the `.env` file (for local development only):
         ```env
         DATABASE_URL=postgresql://postgres:123@localhost:5432/allo?schema=public
         ```
 
-## Running the Project
-
-### Start the Database
-
-1. Start the database using Docker:
+2. Start the database using Docker:
     ```bash
     npm run db:dev:restart
     ```
 
-### Run the Application
-
-1. Start the application in development mode:
+3. Start the application in development mode:
     ```bash
     npm run start:dev
     ```
+
+## Provisioning AWS Resources
+
+1. Navigate to the Terraform directory:
+    ```bash
+    cd ../terraform
+    ```
+
+2. Initialize Terraform:
+    ```bash
+    terraform init
+    ```
+
+3. Apply the Terraform configuration to provision the resources:
+    ```bash
+    terraform apply -auto-approve
+    ```
+
+## Deploying the Application
+
+### Automated Deployment Script
+
+Run the deployment script to build, push, and deploy the application:
+
+```bash
+../deploy.sh
+```
+
+### Cleaning Up
+
+To destroy the provisioned AWS resources and avoid incurring costs, run:
+
+```bash
+terraform destroy -auto-approve
+```

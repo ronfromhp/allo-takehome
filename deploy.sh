@@ -27,6 +27,7 @@ docker push "$REPO_URL:$IMAGE_TAG"
 cd ..
 
 # Update ECS service
-aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment --region $REGION
+aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment --region $REGION > /dev/null
 
-echo "Deployment complete. ECS service is running the latest image."
+cd terraform
+echo "Deployment complete. ECS service is running at: $(terraform output -raw application_url)"
