@@ -11,8 +11,8 @@ Make sure you have the following installed on your machine:
 
 1. Clone the repository:
     ```bash
-    git clone <repository-url>
-    cd <repository-directory>
+    git clone https://github.com/ronfromhp/allo-takehome.git
+    cd allo-takehome/app
     ```
 
 2. Install the dependencies:
