@@ -27,6 +27,10 @@ resource "aws_ecs_task_definition" "demo_app_task" {
         {
           "name": "DATABASE_URL",
           "value": "${var.database_url}"
+        },
+        {
+          "name": "API_KEY",
+          "value": "${var.api_key}"
         }
       ],
       "command": ["sh", "-c", "npm run prisma:dev:deploy && node dist/main.js"],

@@ -62,3 +62,8 @@ variable "database_url" {
   description = "Database URL"
   type        = string
 }
+
+variable "api_key" {
+  description = "API Key"
+  type        = string
+}

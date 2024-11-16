@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
 import { DoctorService } from "./doctor.service";
 import { DoctorDto } from "./dto";
+import { AuthGuard } from "@nestjs/passport";
 
 @Controller('doctors')
+@UseGuards(AuthGuard('api-key'))
 export class DoctorController {
     constructor(private doctorService: DoctorService) { }
 
