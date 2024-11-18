@@ -22,11 +22,10 @@ Creates a new doctor record.
 **Response** (201 Created)
 ```json
 {
-  "id": "uuid",
   "email": "doctor@example.com",
   "firstName": "John",
   "lastName": "Doe",
-  "doctorCredentialId": "auto-generated-id"
+  "doctorCredentialId": 1
 }
 ```
 
@@ -75,40 +74,17 @@ Make sure you have the following installed on your machine:
     npm install
     ```
 
-## Authentication Setup
+## Running the Project Locally
 
-The application uses API key authentication. You'll need to set up this key for both local development and deployment:
-
-1. Create a secure API key for your application (you can use a UUID generator or any secure string)
-
-2. For local development:
-   - Add the API key to your `.env` file in the `app/` directory:
+1. Create a `.env` file in the `app/` directory:
      ```env
      DATABASE_URL=postgresql://postgres:123@localhost:5432/allo
      API_KEY=<your-api-key-here>
      ```
 
-3. For deployment:
-   - Create a `terraform.tfvars` file in the terraform directory:
-     ```hcl
-     api_key = "<your-api-key-here>"
-     ```
-   - Make sure to use the same API key as in your .env file
-   - Add terraform.tfvars to your .gitignore
-
-Note: Keep your API key secure and never commit it to version control.
-
-## Running the Project Locally
-
-1. Create a `.env` file in the `app/` directory:
-     ```env
-     DATABASE_URL=postgresql://postgres:123@localhost:5432/allo_test
-     API_KEY=your-secure-api-key-here
-     ```
-
 2. Start the application in development mode:
     ```bash
-    npm run db:dev:restart
+    npm run db:dev:restart #run it once for the first time to apply migrations and start afresh
     npm run start:dev
     ```
 
@@ -132,7 +108,16 @@ Note: Keep your API key secure and never commit it to version control.
 
 This will use the configuration from your `.env.test` file to run the tests against a separate test database.
 
-## Provisioning AWS Resources
+## Infrastructure
+
+### AWS Components
+- **ECS Fargate**: Containerized application hosting
+- **RDS**: PostgreSQL database
+- **Application Load Balancer**: Traffic distribution
+- **CloudWatch**: Availability monitoring
+- **VPC**: Isolated network environment
+
+### Provisioning AWS Resources
 
 1. Configure the AWS CLI if not already authenticated:
     ```bash
@@ -158,9 +143,9 @@ This will use the configuration from your `.env.test` file to run the tests agai
     terraform apply -auto-approve
     ```
 
-## Deploying the Application
+### Deployment
 
-### Automated Deployment Script
+#### Deploying
 
 Run the deployment script to build, push, and deploy the application:
 
@@ -175,7 +160,7 @@ The script will output the URL of the deployed application. Verify the deploymen
 curl -H "X-API-Key: <your-api-key-here>" your-deployed-url/doctors
 ```
 
-### Cleaning Up
+#### Cleaning Up
 
 To destroy the provisioned AWS resources and avoid incurring costs, run:
 
