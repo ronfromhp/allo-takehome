@@ -108,16 +108,16 @@ Make sure you have the following installed on your machine:
 
 This will use the configuration from your `.env.test` file to run the tests against a separate test database.
 
-## Infrastructure
+# Infrastructure
 
-### AWS Components
+## AWS Components
 - **ECS Fargate**: Containerized application hosting
 - **RDS**: PostgreSQL database
 - **Application Load Balancer**: Traffic distribution
 - **CloudWatch**: Availability monitoring
 - **VPC**: Isolated network environment
 
-### Provisioning AWS Resources
+## Provisioning AWS Resources
 
 1. Configure the AWS CLI if not already authenticated:
     ```bash
@@ -143,9 +143,8 @@ This will use the configuration from your `.env.test` file to run the tests agai
     terraform apply -auto-approve
     ```
 
-### Deployment
+## Deployment
 
-#### Deploying
 
 Run the deployment script to build, push, and deploy the application:
 
@@ -160,7 +159,7 @@ The script will output the URL of the deployed application. Verify the deploymen
 curl -H "X-API-Key: <your-api-key-here>" your-deployed-url/doctors
 ```
 
-#### Cleaning Up
+## Cleaning Up
 
 To destroy the provisioned AWS resources and avoid incurring costs, run:
 
