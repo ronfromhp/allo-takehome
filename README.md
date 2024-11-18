@@ -1,3 +1,56 @@
+# Doctor API Service
+
+A RESTful API service for managing doctor information, built with NestJS and deployed on AWS infrastructure.
+
+## API Documentation
+
+All endpoints require authentication via API key in the `X-API-Key` header.
+
+### POST /doctors
+Creates a new doctor record.
+
+**Request**
+```json
+{
+  "email": "doctor@example.com",
+  "password": "securePassword123",
+  "firstName": "John",
+  "lastName": "Doe"
+}
+```
+
+**Response** (201 Created)
+```json
+{
+  "id": "uuid",
+  "email": "doctor@example.com",
+  "firstName": "John",
+  "lastName": "Doe",
+  "doctorCredentialId": "auto-generated-id"
+}
+```
+
+
+### GET /doctors
+Retrieves a list of all doctors.
+
+**Response** (200 OK)
+```json
+[
+  {
+    "email": "doctor@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "doctorCredentialId": 1
+  }
+]
+```
+
+### Error Responses
+- 400 Bad Request: Invalid input data
+- 401 Unauthorized: Invalid or missing API key
+- 403 Forbidden: Credentials taken
+
 # Project Setup
 
 ## Prerequisites
@@ -31,7 +84,7 @@ The application uses API key authentication. You'll need to set up this key for 
 2. For local development:
    - Add the API key to your `.env` file in the `app/` directory:
      ```env
-     DATABASE_URL=postgresql://postgres:123@localhost:5432/allo?schema=public
+     DATABASE_URL=postgresql://postgres:123@localhost:5432/allo
      API_KEY=<your-api-key-here>
      ```
 
@@ -49,12 +102,13 @@ Note: Keep your API key secure and never commit it to version control.
 
 1. Create a `.env` file in the `app/` directory:
      ```env
-     DATABASE_URL=postgresql://postgres:123@localhost:5432/allo_test?schema=public
+     DATABASE_URL=postgresql://postgres:123@localhost:5432/allo_test
      API_KEY=your-secure-api-key-here
      ```
 
 2. Start the application in development mode:
     ```bash
+    npm run db:dev:restart
     npm run start:dev
     ```
 
@@ -67,7 +121,7 @@ Note: Keep your API key secure and never commit it to version control.
 
 1. Create a `.env.test` file in the `app/` directory:
      ```env
-     DATABASE_URL=postgresql://postgres:123@localhost:5433/allo_test?schema=public
+     DATABASE_URL=postgresql://postgres:123@localhost:5433/allo
      API_KEY=<your-api-key-here>
      ```
 
